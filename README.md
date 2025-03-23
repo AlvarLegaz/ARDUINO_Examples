@@ -8,4 +8,5 @@ Componentes necesarios:
 - 2 pulsadores.
 - 1 Potenciómetro
 - 2 resistencias 10k para los pull-down de los pulsadores.
+- L293D DIP-16, Driver doble puente H.  
 - Montor CC 5VDC.
