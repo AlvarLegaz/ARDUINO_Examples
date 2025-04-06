@@ -11,7 +11,7 @@ Proyecto para controlar el sentido y velocidad de giro con Arduino.
 - `1x`L293D DIP-16, Driver doble puente H.  
 - `1x` Montor CC 5VDC.
 
-## Medida_Distancia_y_Servo_y_Display
+## SensorDistancia_Luz_Servo_LCD
 Diseñar un sistema embebido con **Arduino Uno** que integre:
 - Un sensor **ultrasónico HC-SR04** para medir distancias.
 - Un **LDR** para evaluar la iluminación ambiente.
