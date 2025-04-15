@@ -33,3 +33,25 @@ Diseñar un sistema embebido con **Arduino Uno** que integre:
   - LED para oscuridad (pin 2)  
 - `Jumpers` y `Protoboard`
 
+## Sensor_luz_tem_hum_con_LDC_Serial
+Este proyecto permite medir y visualizar en tiempo real la **temperatura**, **humedad** y el **nivel de luz ambiental** utilizando un sensor **DHT22** y una **fotorresistencia (LDR)**, mostrando la información en una pantalla **LCD I2C**. Además, los datos se pueden solicitar vía puerto **serie** mediante un comando y se devuelven en formato **JSON**.
+
+
+### 📦 Componentes necesarios
+- Arduino UNO (o compatible)
+- Sensor DHT22
+- Fotorresistencia (LDR) + resistencia
+- Pantalla LCD I2C 16x2
+- LED rojo
+- Cables de conexión
+- Protoboard
+
+### ⚙️ Funcionalidades
+- Lectura de temperatura y humedad (sensor DHT22)
+- Lectura del nivel de luz (entrada analógica con LDR)
+- Visualización de los valores en pantalla LCD
+- Activación del LED si hay baja iluminación
+- Envío de datos por puerto serie en formato JSON cuando se recibe el comando `getData`
+
+
+
