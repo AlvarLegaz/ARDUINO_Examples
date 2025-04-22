@@ -1,17 +1,17 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include <DHT.h>
+#include <DHT22.h> //Modulo DHT22 de dvrrel
 
 // Definición de pines
 #define PIN_LED_ROJO 6
 #define PIN_LDR A0
-#define PIN_DHT 13
+#define PIN_DHT 7
 #define TIPO_DHT DHT22
 #define DIRECCION_LCD 0x27
 
 // Inicialización de objetos
 LiquidCrystal_I2C PantallaLCD(DIRECCION_LCD, 16, 2);
-DHT SensorDHT(PIN_DHT, TIPO_DHT);
+DHT22 SensorDHT(PIN_DHT);
 
 // Variables de medición
 int valorAnalogico;
@@ -36,8 +36,9 @@ void setup() {
 }
 
 void loop() {
+  // DHT22 necesita al memos dos segundos entre lecturas
+  delay(200);
   leerDatosSensores();
-
   avisarSiPocaLuz();
 
   // Mostrar datos y enviar si corresponde
@@ -49,8 +50,18 @@ void leerDatosSensores(){
   // Lectura de sensores
   valorAnalogico = analogRead(PIN_LDR);
   nivelLuzVoltios = map(valorAnalogico, 0, 1023, 0, 255) / 51.0;
-  temperatura = SensorDHT.readTemperature();
-  humedad = SensorDHT.readHumidity();
+  float temp = SensorDHT.getTemperature();
+  //temperatura = 23.5;
+  float hum = SensorDHT.getHumidity();
+
+   if (!isnan(temp)) {
+    temperatura = temp;
+  } 
+
+  if (!isnan(hum)) {
+    humedad = hum;
+  } 
+
 }
 
 void avisarSiPocaLuz(){
@@ -62,20 +73,21 @@ void avisarSiPocaLuz(){
 }
 
 void mostrarEnPantalla(float luz, float temp, float hum) {
+ 
   PantallaLCD.setCursor(0, 0);
   PantallaLCD.print("Luz:");
   PantallaLCD.setCursor(5, 0);
-  PantallaLCD.print(luz);
+  PantallaLCD.print(luz, 1);
 
   PantallaLCD.setCursor(0, 1);
   PantallaLCD.print("T:");
   PantallaLCD.setCursor(2, 1);
-  PantallaLCD.print(temp);
+  PantallaLCD.print(temp, 1);
 
   PantallaLCD.setCursor(8, 1);
   PantallaLCD.print("H:");
   PantallaLCD.setCursor(10, 1);
-  PantallaLCD.print(hum);
+  PantallaLCD.print(hum, 1);
 }
 
 void enviarDatos(float luz, float temp, float hum) {
